@@ -15,8 +15,6 @@ public class Carta : MonoBehaviour
         set { back.SetActive(!value); }
     }
 
-    SpriteRenderer _tSR = null;
-
     virtual public void OnMouseDown()
     {
         print(valor + naipe);

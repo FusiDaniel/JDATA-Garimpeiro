@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Garimpeiro : MonoBehaviour
 {
@@ -77,6 +78,16 @@ public class Garimpeiro : MonoBehaviour
             cp.SetSortingLayerName(tSD.layerName);
             tablado.Add(cp);
         }
+        foreach (CartaGarimpeiro tCP in tablado)
+        {
+            foreach (int hid in tCP.slotDef.hiddenBy)
+            {
+                cp = BuscaCartaPelolayoutID(hid);
+                tCP.hiddenBy.Add(cp);
+            }
+        }
+        MoveParaTarget(Draw());
+        UpdateMonte();
     }
 
     CartaGarimpeiro Draw()
@@ -143,13 +154,82 @@ public class Garimpeiro : MonoBehaviour
             case eCartaState.target:
                 break;
             case eCartaState.monte:
-                if (target != null) MoveParaDescarte(target);
+                MoveParaDescarte(target);
                 MoveParaTarget(Draw());
                 UpdateMonte();
                 break;
             case eCartaState.tablado:
+                bool jogadaValida = true;
+                if (!cd.faceUp) jogadaValida = false;
+                if (!ValorAdjacente(cd, target)) jogadaValida = false;
+                if (!jogadaValida) return;
+                tablado.Remove(cd);
+                MoveParaTarget(cd);
+                SetFacesTablado();
                 break;
         }
+        VerificaGameOver();
+    }
 
+    void VerificaGameOver()
+    {
+        if (tablado.Count == 0)
+        {
+            GameOver(true);
+            return;
+        }
+        if (monte.Count > 0) return;
+        foreach (CartaGarimpeiro ct in tablado)
+        {
+            if(ValorAdjacente(ct, target))
+            {
+                return;
+            }
+        }
+        GameOver(false);
+    }
+
+    void GameOver(bool won)
+    {
+        if (won)
+        {
+            print("Game Over. Você VENCEU! :)");
+        } else
+        {
+            print("Game Over. DERROTA... :(");
+        }
+        SceneManager.LoadScene("GarimpeiroGameplay");
+    }
+
+    public bool ValorAdjacente(CartaGarimpeiro c0, CartaGarimpeiro c1)
+    {
+        if (!c0.faceUp || !c1.faceUp) return (false);
+        if (Mathf.Abs(c0.valor - c1.valor) == 1) return (true);
+        if (c0.valor == 1 && c1.valor == 13) return (true);
+        if (c0.valor == 13 && c1.valor == 1) return (true);
+        return (false);
+    }
+
+    CartaGarimpeiro BuscaCartaPelolayoutID(int layoutID)
+    {
+        foreach (CartaGarimpeiro tCP in tablado)
+        {
+            if (tCP.layoutID == layoutID) return (tCP);
+        }
+        return (null);
+    }
+
+    void SetFacesTablado()
+    {
+        foreach (CartaGarimpeiro ct in tablado)
+        {
+            bool faceUp = true;
+            foreach (CartaGarimpeiro cover in ct.hiddenBy)
+            {
+                if (cover.state == eCartaState.tablado) faceUp = false;
+            }
+            ct.faceUp = faceUp;
+        }
     }
 }
+
