@@ -190,9 +190,16 @@ public class Garimpeiro : MonoBehaviour
 
     void GameOver(bool won)
     {
-        if (won) ScoreManager.EVENT(eScoreEvent.gameVitoria);
-        else ScoreManager.EVENT(eScoreEvent.gameDerrota);
-        SceneManager.LoadScene("GarimpeiroGameplay");
+        if (won)
+        {
+            ScoreManager.EVENT(eScoreEvent.gameVitoria);
+            SceneManager.LoadScene("GarimpeiroGameplay");
+        }
+        else
+        {
+            ScoreManager.EVENT(eScoreEvent.gameDerrota);
+            SceneManager.LoadScene("GarimpeiroGameplay");
+        }
     }
 
     public bool ValorAdjacente(CartaGarimpeiro c0, CartaGarimpeiro c1)

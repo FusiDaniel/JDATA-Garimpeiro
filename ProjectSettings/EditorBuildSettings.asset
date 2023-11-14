@@ -5,7 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: e275657d5a3a1ca47b5f181e8970bda0
+  - enabled: 1
+    path: Assets/Scenes/GarimpeiroGameplay.unity
+    guid: 43f20249a5b17f84188b3138b8902b0c
+  - enabled: 1
+    path: Assets/Scenes/Regras.unity
+    guid: e396fdd43ffd9304e91a67e8dc9d0da5
+  - enabled: 1
+    path: Assets/Scenes/Creditos.unity
+    guid: ca61279009e802445945519aa895d294
   m_configObjects: {}

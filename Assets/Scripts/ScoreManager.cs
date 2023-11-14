@@ -54,6 +54,10 @@ public class ScoreManager : MonoBehaviour
         {
             case eScoreEvent.monte:
             case eScoreEvent.gameVitoria:
+                serie = 0;
+                score += scoreRodada;
+                scoreRodada = 0;
+                break;
             case eScoreEvent.gameDerrota:
                 serie = 0;
                 score += scoreRodada;
