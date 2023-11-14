@@ -157,6 +157,7 @@ public class Garimpeiro : MonoBehaviour
                 MoveParaDescarte(target);
                 MoveParaTarget(Draw());
                 UpdateMonte();
+                ScoreManager.EVENT(eScoreEvent.monte);
                 break;
             case eCartaState.tablado:
                 bool jogadaValida = true;
@@ -166,6 +167,7 @@ public class Garimpeiro : MonoBehaviour
                 tablado.Remove(cd);
                 MoveParaTarget(cd);
                 SetFacesTablado();
+                ScoreManager.EVENT(eScoreEvent.mina);
                 break;
         }
         VerificaGameOver();
@@ -181,23 +183,15 @@ public class Garimpeiro : MonoBehaviour
         if (monte.Count > 0) return;
         foreach (CartaGarimpeiro ct in tablado)
         {
-            if(ValorAdjacente(ct, target))
-            {
-                return;
-            }
+            if (ValorAdjacente(ct, target)) return;
         }
         GameOver(false);
     }
 
     void GameOver(bool won)
     {
-        if (won)
-        {
-            print("Game Over. Você VENCEU! :)");
-        } else
-        {
-            print("Game Over. DERROTA... :(");
-        }
+        if (won) ScoreManager.EVENT(eScoreEvent.gameVitoria);
+        else ScoreManager.EVENT(eScoreEvent.gameDerrota);
         SceneManager.LoadScene("GarimpeiroGameplay");
     }
 

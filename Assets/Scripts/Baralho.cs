@@ -53,7 +53,6 @@ public class Baralho : MonoBehaviour
         _tGO = Instantiate(prefabCarta) as GameObject;
         _tGO.transform.parent = pivoBaralho;
         _tSR = _tGO.GetComponent<SpriteRenderer>();
-        //_tGO.transform.localPosition = new Vector3(cNum%13 * 6 - 35, cNum/13 * 8 - 10, 0);
         _tGO.transform.localPosition = new Vector3(20, 5, 0);
         Carta _carta = _tGO.GetComponent<Carta>();
         if (nomesCartas[cNum].StartsWith("C")) _carta.naipe = "_of_hearts";

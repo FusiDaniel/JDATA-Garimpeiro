@@ -26,7 +26,7 @@ public class Carta : MonoBehaviour
 
     void Start()
     {
-        SetSortOrder(0);
+        SetSortOrder(1);
     }
 
     public void PopulateSpriteRenderers()

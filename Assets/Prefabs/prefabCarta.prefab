@@ -129,6 +129,7 @@ MonoBehaviour:
   nome: 
   valor: 0
   back: {fileID: 6004563543591164573, guid: ec4448c36d4cd6a4dbae06490712d064, type: 3}
+  spriteRenderers: []
   state: 0
   hiddenBy: []
   layoutID: 0
