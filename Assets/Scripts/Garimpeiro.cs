@@ -15,6 +15,7 @@ public class Garimpeiro : MonoBehaviour
     public Sprite cartaBack;
     public GameObject prefabCarta;
     public GameObject prefabSprite;
+    public GameObject EndingScreen;
 
     [Header("Set Dynamically")]
     public Baralho baralho;
@@ -40,6 +41,7 @@ public class Garimpeiro : MonoBehaviour
         layout.ReadLayout(layoutXML.text);
         monte = ConverteListaCartasToListCartasGarimpeiro(baralho.cartasBaralho);
         LayoutGame();
+        EndingScreen.SetActive(false);
     }
 
     List<CartaGarimpeiro> ConverteListaCartasToListCartasGarimpeiro(List<Carta> lCD)
@@ -193,12 +195,14 @@ public class Garimpeiro : MonoBehaviour
         if (won)
         {
             ScoreManager.EVENT(eScoreEvent.gameVitoria);
-            SceneManager.LoadScene("GarimpeiroGameplay");
+            //SceneManager.LoadScene("GarimpeiroGameplay");
+            EndingScreen.SetActive(true);
         }
         else
         {
             ScoreManager.EVENT(eScoreEvent.gameDerrota);
-            SceneManager.LoadScene("GarimpeiroGameplay");
+            //SceneManager.LoadScene("GarimpeiroGameplay");
+            EndingScreen.SetActive(true);
         }
     }
 
