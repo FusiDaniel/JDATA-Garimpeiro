@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,6 +17,8 @@ public class Garimpeiro : MonoBehaviour
     public GameObject prefabCarta;
     public GameObject prefabSprite;
     public GameObject EndingScreen;
+    public TMP_Text scoreTitle;
+    public TMP_Text scoreBody;
 
     [Header("Set Dynamically")]
     public Baralho baralho;
@@ -27,6 +30,7 @@ public class Garimpeiro : MonoBehaviour
     public CartaGarimpeiro target;
     public List<CartaGarimpeiro> tablado;
     public List<CartaGarimpeiro> descarte;
+    
 
     void Awake()
     {
@@ -42,6 +46,8 @@ public class Garimpeiro : MonoBehaviour
         monte = ConverteListaCartasToListCartasGarimpeiro(baralho.cartasBaralho);
         LayoutGame();
         EndingScreen.SetActive(false);
+        ScoreManager.scoreTitle = scoreTitle;
+        ScoreManager.scoreBody = scoreBody;
     }
 
     List<CartaGarimpeiro> ConverteListaCartasToListCartasGarimpeiro(List<Carta> lCD)
@@ -179,6 +185,8 @@ public class Garimpeiro : MonoBehaviour
     {
         if (tablado.Count == 0)
         {
+            scoreTitle.text = "Vitória!";
+
             GameOver(true);
             return;
         }
@@ -192,16 +200,15 @@ public class Garimpeiro : MonoBehaviour
 
     void GameOver(bool won)
     {
+        
         if (won)
         {
             ScoreManager.EVENT(eScoreEvent.gameVitoria);
-            //SceneManager.LoadScene("GarimpeiroGameplay");
             EndingScreen.SetActive(true);
         }
         else
         {
             ScoreManager.EVENT(eScoreEvent.gameDerrota);
-            //SceneManager.LoadScene("GarimpeiroGameplay");
             EndingScreen.SetActive(true);
         }
     }
@@ -235,6 +242,14 @@ public class Garimpeiro : MonoBehaviour
             }
             ct.faceUp = faceUp;
         }
+    }
+    public void chamaGarimpeiroGameplay()
+    {
+        SceneManager.LoadScene("GarimpeiroGameplay");
+    }
+    public void chamaMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
 

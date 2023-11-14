@@ -14,7 +14,9 @@ public class ScoreManager : MonoBehaviour
     static private ScoreManager S;
     static public int SCORE_DA_PARTIDA_ANTERIOR = 0;
     static public int HIGH_SCORE = 0;
-
+    static public TMP_Text scoreTitle;
+    static public TMP_Text scoreBody;
+ 
     [Header("Set Dynamically")]
     public int serie = 0;
     public int scoreRodada = 0;
@@ -78,11 +80,20 @@ public class ScoreManager : MonoBehaviour
                     HIGH_SCORE = SCORE_DA_PARTIDA_ANTERIOR;
                     PlayerPrefs.SetInt("GarimpeiroHighScore", score);
                 }
-                print("VITÓRIA! Pontos desta Partida: " + score);
+                scoreTitle.text = "Vitória!";
                 break;
             case eScoreEvent.gameDerrota:
-                if (HIGH_SCORE <= score) print("Você teve uma pontuação alta! High score: " + score);
-                else print("Sua pontuação no game foi: " + score);
+                if (HIGH_SCORE <= score)
+                {
+                    scoreTitle.text = "Derrota... MAS";
+                    scoreBody.text = "Você teve uma pontuação alta! High score: " + score;
+                }
+                else
+                {
+                    scoreTitle.text = "Derrota...";
+                    scoreBody.text = "Sua pontuação no game foi: " + score;
+                }
+
                 break;
             default:
                 scoreText.text = "Total: " + score.ToString() +
