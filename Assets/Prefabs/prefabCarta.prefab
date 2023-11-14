@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8499232672430828595}
   - component: {fileID: 6877901337670649938}
   - component: {fileID: 2283240044306290379}
-  - component: {fileID: 4809251226794481705}
+  - component: {fileID: 4109629937010370126}
   m_Layer: 0
   m_Name: prefabCarta
   m_TagString: Untagged
@@ -112,7 +112,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 7.26}
   m_EdgeRadius: 0
---- !u!114 &4809251226794481705
+--- !u!114 &4109629937010370126
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6004563543591164573}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c05fdb3c53902c4e97c468a5799e056, type: 3}
+  m_Script: {fileID: 11500000, guid: b17edda381c66bf48a0ab927bcaf6098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
@@ -129,3 +129,16 @@ MonoBehaviour:
   nome: 
   valor: 0
   back: {fileID: 6004563543591164573, guid: ec4448c36d4cd6a4dbae06490712d064, type: 3}
+  state: 0
+  hiddenBy: []
+  layoutID: 0
+  slotDef:
+    x: 0
+    y: 0
+    faceUp: 0
+    layerName: Default
+    layerID: 0
+    id: 0
+    hiddenBy: 
+    type: slot
+    espaco: {x: 0, y: 0}

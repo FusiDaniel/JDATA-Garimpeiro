@@ -53,7 +53,8 @@ public class Baralho : MonoBehaviour
         _tGO = Instantiate(prefabCarta) as GameObject;
         _tGO.transform.parent = pivoBaralho;
         _tSR = _tGO.GetComponent<SpriteRenderer>();
-        _tGO.transform.localPosition = new Vector3(cNum%13 * 6 - 35, cNum/13 * 8 - 10, 0);
+        //_tGO.transform.localPosition = new Vector3(cNum%13 * 6 - 35, cNum/13 * 8 - 10, 0);
+        _tGO.transform.localPosition = new Vector3(20, 5, 0);
         Carta _carta = _tGO.GetComponent<Carta>();
         if (nomesCartas[cNum].StartsWith("C")) _carta.naipe = "_of_hearts";
         else if (nomesCartas[cNum].StartsWith("O")) _carta.naipe = "_of_diamonds";
@@ -84,5 +85,19 @@ public class Baralho : MonoBehaviour
         _carta.back = _tGO;
         _carta.nome = "back";
         return _carta;
+    }
+
+    static public void Embaralha(ref List<Carta> oCartas)
+    {
+        List<Carta> tCartas = new List<Carta>();
+        int ndx;
+        tCartas = new List<Carta>();
+        while (oCartas.Count > 0)
+        {
+            ndx = Random.Range(0, oCartas.Count);
+            tCartas.Add(oCartas[ndx]);
+            oCartas.RemoveAt(ndx);
+        }
+        oCartas = tCartas;
     }
 }
