@@ -18,9 +18,6 @@ public class Carta : MonoBehaviour
     virtual public void OnMouseDown()
     {
         print(valor + naipe);
-        //_tSR = GetComponent<SpriteRenderer>();
-        //if (_tSR.sortingOrder == 3) _tSR.sortingOrder = 1;
-        //else Destroy(gameObject);
     }
     public SpriteRenderer[] spriteRenderers;
 
