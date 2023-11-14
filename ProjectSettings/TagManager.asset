@@ -41,3 +41,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Row0
+    uniqueID: 3060752663
+    locked: 0
+  - name: Row1
+    uniqueID: 1494037275
+    locked: 0
+  - name: Row2
+    uniqueID: 1824454493
+    locked: 0
+  - name: Row3
+    uniqueID: 527120665
+    locked: 0
+  - name: Monte
+    uniqueID: 1751893691
+    locked: 0
+  - name: Descarte
+    uniqueID: 1616792575
+    locked: 0

@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Garimpeiro : MonoBehaviour
 {
@@ -42,7 +40,7 @@ public class Garimpeiro : MonoBehaviour
         monte = ConverteListaCartasToListCartasGarimpeiro(baralho.cartasBaralho);
         LayoutGame();
     }
-    
+
     List<CartaGarimpeiro> ConverteListaCartasToListCartasGarimpeiro(List<Carta> lCD)
     {
         List<CartaGarimpeiro> lCP = new List<CartaGarimpeiro>();
@@ -76,6 +74,8 @@ public class Garimpeiro : MonoBehaviour
             cp.layoutID = tSD.id;
             cp.slotDef = tSD;
             cp.state = eCartaState.tablado;
+            cp.SetSortingLayerName(tSD.layerName);
+            tablado.Add(cp);
         }
     }
 
@@ -84,5 +84,72 @@ public class Garimpeiro : MonoBehaviour
         CartaGarimpeiro cd = monte[0];
         monte.RemoveAt(0);
         return (cd);
+    }
+
+    void MoveParaDescarte(CartaGarimpeiro ct)
+    {
+        ct.state = eCartaState.descarte;
+        descarte.Add(ct);
+        ct.transform.parent = pivoBaralho;
+        ct.transform.localPosition = new Vector3(
+        layout.multiplicador.x * layout.descarte.x,
+        layout.multiplicador.y * layout.descarte.y,
+        -layout.descarte.layerID + 0.5f);
+        ct.faceUp = true;
+        ct.SetSortingLayerName(layout.descarte.layerName);
+        ct.SetSortOrder(-100 + descarte.Count);
+    }
+
+    void MoveParaTarget(CartaGarimpeiro ct)
+    {
+        if (target != null) MoveParaDescarte(target);
+        target = ct;
+        ct.state = eCartaState.target;
+        ct.transform.parent = pivoBaralho;
+        ct.transform.localPosition = new Vector3(
+        layout.multiplicador.x * layout.descarte.x,
+        layout.multiplicador.y * layout.descarte.y,
+        -layout.descarte.layerID);
+        ct.faceUp = true;
+        ct.SetSortingLayerName(layout.descarte.layerName);
+        ct.SetSortOrder(0);
+    }
+
+    void UpdateMonte()
+    {
+        CartaGarimpeiro ct;
+        for (int i = 0; i < monte.Count; i++)
+        {
+            ct = monte[i];
+            ct.transform.parent = pivoBaralho;
+            Vector2 dpSepara = layout.monte.espaco;
+            ct.transform.localPosition = new Vector3(
+            layout.multiplicador.x * (layout.monte.x + i * dpSepara.x),
+            layout.multiplicador.y * (layout.monte.y + i * dpSepara.y),
+            -layout.monte.layerID + 0.1f * i);
+            ct.faceUp = false;
+
+            ct.state = eCartaState.monte;
+            ct.SetSortingLayerName(layout.monte.layerName);
+            ct.SetSortOrder(-10 * i);
+        }
+
+    }
+
+    public void CartaClicada(CartaGarimpeiro cd)
+    {
+        switch (cd.state)
+        {
+            case eCartaState.target:
+                break;
+            case eCartaState.monte:
+                if (target != null) MoveParaDescarte(target);
+                MoveParaTarget(Draw());
+                UpdateMonte();
+                break;
+            case eCartaState.tablado:
+                break;
+        }
+
     }
 }

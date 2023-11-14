@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +19,7 @@ public class Baralho : MonoBehaviour
     void Start()
     {
         IniciaBaralho();
+        Embaralha(ref cartasBaralho);
     }
 
     public void IniciaBaralho()

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,4 +19,9 @@ public class CartaGarimpeiro : Carta
     public int layoutID;
 
     public SlotDef slotDef;
+
+    public override void OnMouseDown()
+    {
+        Garimpeiro.S.CartaClicada(this);
+    }
 }

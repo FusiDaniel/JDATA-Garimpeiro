@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Carta : MonoBehaviour
@@ -19,10 +17,51 @@ public class Carta : MonoBehaviour
 
     SpriteRenderer _tSR = null;
 
-    public void OnMouseDown()
+    virtual public void OnMouseDown()
     {
-        _tSR = GetComponent<SpriteRenderer>();
-        if (_tSR.sortingOrder == 3) _tSR.sortingOrder = 1;
-        else Destroy(gameObject);
+        print(valor + naipe);
+        //_tSR = GetComponent<SpriteRenderer>();
+        //if (_tSR.sortingOrder == 3) _tSR.sortingOrder = 1;
+        //else Destroy(gameObject);
+    }
+    public SpriteRenderer[] spriteRenderers;
+
+    void Start()
+    {
+        SetSortOrder(0);
+    }
+
+    public void PopulateSpriteRenderers()
+    {
+        if (spriteRenderers == null || spriteRenderers.Length == 0)
+        {
+            spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        }
+    }
+
+    public void SetSortingLayerName(string tSLN)
+    {
+        PopulateSpriteRenderers();
+        foreach (SpriteRenderer tSR in spriteRenderers)
+        {
+            tSR.sortingLayerName = tSLN;
+        }
+    }
+    public void SetSortOrder(int sOrd)
+    {
+        PopulateSpriteRenderers();
+        foreach (SpriteRenderer tSR in spriteRenderers)
+        {
+            switch (tSR.gameObject.name)
+            {
+                case "back":
+                    tSR.sortingOrder = sOrd + 1;
+                    break;
+                case "face":
+                default:
+                    tSR.sortingOrder = sOrd;
+                    break;
+            }
+        }
     }
 }
