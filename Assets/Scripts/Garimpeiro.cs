@@ -172,6 +172,7 @@ public class Garimpeiro : MonoBehaviour
                 if (!cd.faceUp) jogadaValida = false;
                 if (!ValorAdjacente(cd, target)) jogadaValida = false;
                 if (!jogadaValida) return;
+                AudioManager.Instance.PlaySound("SuccessBeep");
                 tablado.Remove(cd);
                 MoveParaTarget(cd);
                 SetFacesTablado();
